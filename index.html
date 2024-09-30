@@ -1,4 +1,6 @@
-<html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prismatikai</title>
@@ -370,7 +372,7 @@
             </div>
             <div class="model"></div>
         </div>
-    
+    </div>
     <header>
         <h1>Welkom bij Prismatikai</h1>
     </header>
@@ -402,38 +404,38 @@
                 <h3>Aanmeldformulier</h3>
                 
                 <label for="name">Naam:</label>
-                <input type="text" id="name" name="name" placeholder="Wat is je naam?" required="">
+                <input type="text" id="name" name="name" placeholder="Wat is je naam?" required>
 
                 <label for="company">Bedrijf:</label>
-                <input type="text" id="company" name="company" placeholder="Wat is je bedrijf?" required="">
+                <input type="text" id="company" name="company" placeholder="Wat is je bedrijf?" required>
 
                 <label for="email">E-mailadres:</label>
-                <input type="email" id="email" name="email" placeholder="Wat is je e-mailadres?" required="">
+                <input type="email" id="email" name="email" placeholder="Wat is je e-mailadres?" required>
 
                 <label for="phone">Telefoonnummer:</label>
-                <input type="tel" id="phone" name="phone" placeholder="Wat is je telefoonnummer?" required="">
+                <input type="tel" id="phone" name="phone" placeholder="Wat is je telefoonnummer?" required>
 
                 <label for="message">Bericht:</label>
-                <textarea id="message" name="message" rows="4" placeholder="Algemene informatie" required=""></textarea>
+                <textarea id="message" name="message" rows="4" placeholder="Algemene informatie" required></textarea>
 
                 <label>Hoe heb je van ons gehoord?</label>
                 <div class="checkbox-group">
-                    <input type="radio" id="search-engine" name="referral" value="Zoekmachine" required="">
+                    <input type="radio" id="search-engine" name="referral" value="Zoekmachine" required>
                     <label for="search-engine">Zoekmachine</label>
 
-                    <input type="radio" id="social-media" name="referral" value="Sociale Media" required="">
+                    <input type="radio" id="social-media" name="referral" value="Sociale Media" required>
                     <label for="social-media">Sociale Media</label>
 
-                    <input type="radio" id="recommendation" name="referral" value="Aanbeveling" required="">
+                    <input type="radio" id="recommendation" name="referral" value="Aanbeveling" required>
                     <label for="recommendation">Aanbeveling</label>
 
-                    <input type="radio" id="other" name="referral" value="Anders" required="">
+                    <input type="radio" id="other" name="referral" value="Anders" required>
                     <label for="other">Anders:</label>
                     <input type="text" name="other-referral" placeholder="Specificeer">
                 </div>
 
                 <label for="demo">Ik wil een demonstratie aanvragen:</label>
-                <input type="checkbox" id="demo" name="demo" value="Ja" checked="">
+                <input type="checkbox" id="demo" name="demo" value="Ja" checked>
 
                 <input type="submit" value="Verstuur">
             </form>
@@ -449,7 +451,7 @@
                 <p><a href="#" onclick="openForm()">Bekijk onze Algemene Voorwaarden</a></p>
                 <footer>
                 </footer>
-                </footer></div>
+                </div>
                 </div>
                 
                 <!-- Privacybeleid Popup -->
@@ -522,9 +524,9 @@
                 </div>
                 
 
-            
-        
-    
+            </footer>
+        </div>
+    </div>
      <!-- Algemene Voorwaarden Popup -->
      <div class="form-popup" id="myForm">
         <h1>Algemene Voorwaarden Prismatik</h1>
@@ -609,12 +611,12 @@
     </div>
 
 
+</footer>
+</div>
+</div>
 
-
-
-
-
-
+</section>
+</section>
 <br>
 
 <div>
@@ -629,11 +631,11 @@
         <a href="https://www.youtube.com/channel/UC1Gf5ezfop8wLp-SlIHuG7w" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 30px; margin: 0 10px;">
         </a>
-        <a href="https://api.whatsapp.com/send/?phone=31626472332&amp;text&amp;type=phone_number&amp;app_absent=0" target="_blank">
+        <a href="https://api.whatsapp.com/send/?phone=31626472332&text&type=phone_number&app_absent=0" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 30px; margin: 0 10px;">
         </a>
     </div>
-    <p>© 2024 Prismatik. Alle rechten voorbehouden.</p>
+    <p>&copy; 2024 Prismatik. Alle rechten voorbehouden.</p>
 
 
     
@@ -662,45 +664,6 @@
 
 
 
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
-</script>
+</body>
+</html>
 
-
-
-</body></html>
