@@ -4,8 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prismatikai - AI Chatbot Solutions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            /* Fresh Color Palette */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --fresh-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --warm-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --purple-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            --ocean-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            
+            /* Main Colors */
+            --primary-blue: #4facfe;
+            --secondary-cyan: #00f2fe;
+            --accent-purple: #667eea;
+            --accent-pink: #fa709a;
+            --success-green: #38ef7d;
+            --warning-yellow: #fee140;
+            
+            /* Neutral Colors */
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --medium-gray: #e2e8f0;
+            --dark-gray: #64748b;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.1);
+            
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 30px;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,30 +51,32 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            position: relative;
+            font-family: 'Poppins', sans-serif;
+            background: var(--light-gray);
+            color: var(--text-dark);
+            line-height: 1.7;
             overflow-x: hidden;
-            line-height: 1.6;
         }
 
+        /* Animated Background */
         body::before {
-            position: absolute;
-            width: min(1400px, 90vw);
-            top: 10%;
-            left: 50%;
-            height: 90%;
-            transform: translateX(-50%);
             content: '';
-            background-image: url(images/bg.png);
-            background-size: 100%;
-            background-repeat: no-repeat;
-            background-position: top center;
-            pointer-events: none;
-            opacity: 0.1;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--fresh-gradient);
+            opacity: 0.03;
+            z-index: -1;
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(-2%) translateY(-1%); }
+            50% { transform: translateX(2%) translateY(1%); }
+            75% { transform: translateX(-1%) translateY(2%); }
         }
 
         /* Navigation */
@@ -45,14 +85,15 @@
             top: 0;
             width: 100%;
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
             z-index: 1000;
             padding: 1rem 0;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-md);
+            border-bottom: 1px solid rgba(79, 172, 254, 0.1);
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -61,128 +102,228 @@
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #667eea;
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: var(--fresh-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
         }
 
         .home-button {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: var(--fresh-gradient);
             color: white;
-            padding: 0.75rem 1.5rem;
+            padding: 0.875rem 2rem;
             border: none;
             border-radius: 50px;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .home-button:hover::before {
+            left: 100%;
         }
 
         .home-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
         }
 
         /* Hero Section */
         .hero-section {
             min-height: 100vh;
+            background: var(--fresh-gradient);
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             padding-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
         }
 
         .hero-content {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 0 2rem;
+            position: relative;
+            z-index: 2;
         }
 
         .hero-title {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #ffffff, #e2e8f0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            letter-spacing: -1px;
+            animation: slideInUp 1s ease-out;
         }
 
         .hero-subtitle {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            font-weight: 300;
+            font-size: 1.375rem;
+            margin-bottom: 3rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+            animation: slideInUp 1s ease-out 0.2s both;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-button {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-primary {
+            background: white;
+            color: var(--primary-blue);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .cta-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
         }
 
         /* 3D Slider */
         .banner {
             width: 100%;
-            height: 100vh;
+            height: 60vh;
             text-align: center;
             overflow: hidden;
             position: relative;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            margin: 4rem 0;
         }
 
         .banner .slider {
             position: absolute;
-            width: 200px;
-            height: 250px;
-            top: 15%;
-            left: calc(50% - 100px);
+            width: 220px;
+            height: 280px;
+            top: 20%;
+            left: calc(50% - 110px);
             transform-style: preserve-3d;
-            transform: perspective(1000px);
-            animation: autoRun 20s linear infinite;
+            transform: perspective(1200px);
+            animation: autoRun 25s linear infinite;
             z-index: 2;
         }
 
         @keyframes autoRun {
             from {
-                transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
+                transform: perspective(1200px) rotateX(-16deg) rotateY(0deg);
             }
             to {
-                transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
+                transform: perspective(1200px) rotateX(-16deg) rotateY(360deg);
             }
         }
 
         .banner .slider .item {
             position: absolute;
             inset: 0;
-            transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(550px);
-            border-radius: 15px;
+            transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(600px);
+            border-radius: var(--radius-lg);
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--shadow-xl);
+            border: 3px solid white;
         }
 
         .banner .slider .item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .banner .slider .item:hover img {
+            transform: scale(1.05);
         }
 
         .banner .content {
             position: absolute;
-            bottom: 0;
+            bottom: 10%;
             left: 50%;
             transform: translateX(-50%);
             width: min(1400px, 100vw);
-            height: max-content;
-            padding-bottom: 100px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
             z-index: 1;
         }
 
         .banner .content h1 {
-            font-family: 'Inter', sans-serif;
-            font-size: 8rem;
-            line-height: 1em;
-            color: rgba(255, 255, 255, 0.1);
+            font-family: 'Poppins', sans-serif;
+            font-size: 6rem;
+            line-height: 1;
+            color: rgba(79, 172, 254, 0.1);
             position: relative;
             font-weight: 900;
+            letter-spacing: -2px;
         }
 
         .banner .content h1::after {
@@ -190,69 +331,138 @@
             inset: 0;
             content: attr(data-content);
             z-index: 2;
-            -webkit-text-stroke: 2px rgba(255, 255, 255, 0.8);
+            -webkit-text-stroke: 3px var(--primary-blue);
             color: transparent;
         }
 
         /* Main Content */
         .main-content {
-            background: rgba(255, 255, 255, 0.95);
-            color: #1a202c;
-            margin-top: 50px;
-            border-radius: 30px 30px 0 0;
+            background: white;
             position: relative;
             z-index: 10;
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            margin-top: -2rem;
+            box-shadow: var(--shadow-xl);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
         }
 
         .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 3rem;
+            font-weight: 800;
             text-align: center;
-            margin-bottom: 1rem;
-            color: #2d3748;
+            margin-bottom: 1.5rem;
+            background: var(--fresh-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
         }
 
         .section-subtitle {
-            font-size: 1.125rem;
+            font-size: 1.25rem;
             text-align: center;
-            margin-bottom: 3rem;
-            color: #718096;
-            max-width: 600px;
+            margin-bottom: 4rem;
+            color: var(--text-light);
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            font-weight: 400;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin: 4rem 0;
         }
 
         .feature-card {
             background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--medium-gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--fresh-gradient);
+        }
+
+        .feature-card:nth-child(2)::before {
+            background: var(--success-gradient);
+        }
+
+        .feature-card:nth-child(3)::before {
+            background: var(--warm-gradient);
+        }
+
+        .feature-card:nth-child(4)::before {
+            background: var(--purple-gradient);
+        }
+
+        .feature-card:nth-child(5)::before {
+            background: var(--ocean-gradient);
+        }
+
+        .feature-card:nth-child(6)::before {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
         }
 
         .feature-card h3 {
-            color: #667eea;
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
-            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.375rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .feature-card h3::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--fresh-gradient);
+        }
+
+        .feature-card:nth-child(2) h3::before {
+            background: var(--success-gradient);
+        }
+
+        .feature-card:nth-child(3) h3::before {
+            background: var(--warm-gradient);
+        }
+
+        .feature-card:nth-child(4) h3::before {
+            background: var(--purple-gradient);
+        }
+
+        .feature-card:nth-child(5) h3::before {
+            background: var(--ocean-gradient);
+        }
+
+        .feature-card:nth-child(6) h3::before {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
         }
 
         .feature-card ul {
@@ -261,85 +471,169 @@
         }
 
         .feature-card li {
-            margin-bottom: 0.75rem;
-            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+            padding-left: 2rem;
             position: relative;
+            color: var(--text-light);
+            font-weight: 500;
         }
 
         .feature-card li::before {
-            content: "✓";
+            content: "✨";
             position: absolute;
             left: 0;
-            color: #48bb78;
-            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--fresh-gradient);
+            padding: 4rem 0;
+            margin: 4rem 0;
+            border-radius: var(--radius-xl);
+            color: white;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            padding: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 500;
         }
 
         /* Form Styling */
         .form-container {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            padding: 3rem;
-            border-radius: 20px;
-            margin: 3rem 0;
+            background: var(--success-gradient);
+            padding: 4rem;
+            border-radius: var(--radius-xl);
+            margin: 4rem 0;
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .form-container h3 {
             text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2rem;
-            font-weight: 600;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
         }
 
         form {
             display: grid;
-            gap: 1.5rem;
-            max-width: 600px;
+            gap: 2rem;
+            max-width: 700px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
         }
 
         input, textarea, select {
-            padding: 1rem;
+            padding: 1.25rem;
             border: none;
-            border-radius: 10px;
+            border-radius: var(--radius-md);
             font-size: 1rem;
-            background: rgba(255, 255, 255, 0.9);
-            color: #2d3748;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-dark);
             transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: var(--shadow-sm);
         }
 
         input:focus, textarea:focus, select:focus {
             outline: none;
             background: white;
-            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
         }
 
         input[type="submit"] {
             background: white;
-            color: #667eea;
-            font-weight: 600;
+            color: var(--success-green);
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.1rem;
+            padding: 1.5rem;
+            margin-top: 1rem;
         }
 
         input[type="submit"]:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
         }
 
         label {
-            font-weight: 500;
-            margin-bottom: 0.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
             display: block;
+            font-size: 1rem;
         }
 
         .checkbox-group {
             display: grid;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(10px);
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
             gap: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
         }
 
         .checkbox-group input[type="radio"] {
             width: auto;
-            margin-right: 0.5rem;
+            margin: 0;
+            accent-color: white;
         }
 
         /* Popup Styles */
@@ -350,150 +644,282 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background: white;
-            color: #2d3748;
-            padding: 2rem;
+            color: var(--text-dark);
+            padding: 3rem;
             max-width: 90%;
-            max-height: 80vh;
+            max-height: 85vh;
             overflow-y: auto;
-            border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
             z-index: 1001;
+            border: 1px solid var(--medium-gray);
+        }
+
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
         }
 
         .form-popup h1 {
-            color: #2d3748;
-            margin-bottom: 1.5rem;
-            font-size: 1.75rem;
+            background: var(--fresh-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            font-weight: 700;
         }
 
         .form-popup .btn {
-            background: #667eea;
+            background: var(--fresh-gradient);
             color: white;
-            padding: 0.75rem 1.5rem;
+            padding: 1rem 2rem;
             border: none;
-            border-radius: 10px;
+            border-radius: var(--radius-md);
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
+            font-size: 1rem;
         }
 
         .form-popup .btn:hover {
-            background: #5a67d8;
             transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .form-popup .cancel {
-            background: #e53e3e;
-        }
-
-        .form-popup .cancel:hover {
-            background: #c53030;
+            background: var(--warm-gradient);
         }
 
         /* Footer */
         footer {
-            background: #1a202c;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
             color: white;
-            padding: 3rem 0 2rem;
+            padding: 4rem 0 2rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--fresh-gradient);
         }
 
         .social-media-links {
             display: flex;
             justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
 
         .social-media-links a {
-            display: inline-block;
-            transition: transform 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
         }
 
         .social-media-links a:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px) scale(1.1);
+            background: var(--fresh-gradient);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .social-media-links img {
+            width: 24px;
+            height: 24px;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-links {
+            margin: 2rem 0;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-cyan);
         }
 
         .powered-by {
-            margin-top: 2rem;
+            margin-top: 3rem;
             padding-top: 2rem;
-            border-top: 1px solid #4a5568;
-            font-size: 0.875rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
             opacity: 0.8;
         }
 
         .powered-by a {
-            color: #667eea;
+            color: var(--secondary-cyan);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            transition: color 0.3s ease;
         }
 
         .powered-by a:hover {
-            color: #5a67d8;
+            color: white;
         }
 
         /* Responsive Design */
-        @media screen and (max-width: 1023px) {
-            .banner .slider {
-                width: 160px;
-                height: 200px;
-                left: calc(50% - 80px);
-            }
-            
-            .banner .slider .item {
-                transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(300px);
+        @media screen and (max-width: 1200px) {
+            .hero-title {
+                font-size: 3rem;
             }
             
             .banner .content h1 {
-                text-align: center;
-                width: 100%;
-                font-size: 5rem;
+                font-size: 4rem;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
             }
             
             .hero-title {
                 font-size: 2.5rem;
             }
-        }
-
-        @media screen and (max-width: 767px) {
+            
+            .hero-subtitle {
+                font-size: 1.125rem;
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+            
             .banner .slider {
-                width: 100px;
-                height: 150px;
-                left: calc(50% - 50px);
+                width: 140px;
+                height: 180px;
+                left: calc(50% - 70px);
             }
             
             .banner .slider .item {
-                transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(180px);
+                transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(250px);
             }
             
             .banner .content h1 {
-                font-size: 3rem;
-            }
-            
-            .hero-title {
-                font-size: 2rem;
-            }
-            
-            .nav-container {
-                padding: 0 1rem;
+                font-size: 2.5rem;
             }
             
             .container {
-                padding: 2rem 1rem;
+                padding: 3rem 1rem;
             }
             
             .form-container {
                 padding: 2rem 1rem;
             }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .form-popup {
+                padding: 2rem 1rem;
+                max-width: 95%;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--fresh-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeOut 2s ease-in-out 1s forwards;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Loading Animation -->
+    <div class="loading-animation">
+        <div class="loading-spinner"></div>
+    </div>
+
     <!-- Navigation -->
     <nav class="nav-header">
         <div class="nav-container">
             <div class="logo">Prismatikai</div>
-            <a href="#top" class="home-button" onclick="scrollToSection('home'); return false;">Home</a>
+            <a href="#home" class="home-button" onclick="scrollToSection('home'); return false;">Home</a>
         </div>
     </nav>
 
@@ -501,7 +927,11 @@
     <section class="hero-section" id="home">
         <div class="hero-content">
             <h1 class="hero-title">Welkom bij Prismatikai</h1>
-            <p class="hero-subtitle">De toekomst van klantinteractie met onze geavanceerde AI-chatbots</p>
+            <p class="hero-subtitle">De toekomst van klantinteractie met onze geavanceerde AI-chatbots. Transformeer uw bedrijf met intelligente automatisering.</p>
+            <div class="hero-cta">
+                <a href="#contact" class="cta-button cta-primary" onclick="scrollToSection('contact'); return false;">Start Nu</a>
+                <a href="#features" class="cta-button cta-secondary" onclick="scrollToSection('features'); return false;">Ontdek Meer</a>
+            </div>
         </div>
     </section>
 
@@ -527,11 +957,32 @@
     <!-- Main Content -->
     <main class="main-content">
         <div class="container">
-            <section class="content">
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 3rem;">Waarom Kiezen Voor Ons?</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Beschikbaarheid</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">99%</span>
+                        <span class="stat-label">Klanttevredenheid</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Tevreden Klanten</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">∞</span>
+                        <span class="stat-label">Mogelijkheden</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content" id="features">
                 <h2 class="section-title">Ontdek de Kracht van Prismatik Chatbots</h2>
                 <p class="section-subtitle">In een wereld waar klantinteractie essentieel is, biedt Prismatik de oplossing die je nodig hebt om voorop te blijven. Onze geavanceerde chatbots transformeren de manier waarop bedrijven communiceren met hun klanten door efficiënte, 24/7 ondersteuning te bieden zonder de noodzaak van menselijke tussenkomst.</p>
-                
-                <h3 class="section-title" style="font-size: 2rem; margin-top: 3rem;">Waarom Kiezen voor Prismatik Chatbots?</h3>
                 
                 <div class="features-grid">
                     <div class="feature-card">
@@ -540,6 +991,7 @@
                             <li>24/7 klantenservice zonder onderbrekingen</li>
                             <li>Directe respons op klantvragen</li>
                             <li>Geen wachttijden voor uw klanten</li>
+                            <li>Wereldwijde tijdzone ondersteuning</li>
                         </ul>
                     </div>
                     
@@ -549,227 +1001,326 @@
                             <li>Chatbots afgestemd op uw bedrijf</li>
                             <li>Naadloze integratie met uw merkstem</li>
                             <li>Aangepaste workflows en processen</li>
+                            <li>Meertalige ondersteuning</li>
                         </ul>
                     </div>
                     
                     <div class="feature-card">
                         <h3>Efficiëntie en Kostenbesparing</h3>
                         <ul>
-                            <li>Verlaag operationele kosten</li>
+                            <li>Verlaag operationele kosten tot 70%</li>
                             <li>Automatiseer routinematige taken</li>
                             <li>Focus op strategische activiteiten</li>
+                            <li>Verhoog productiviteit van uw team</li>
                         </ul>
                     </div>
                     
                     <div class="feature-card">
                         <h3>Naadloze Integratie</h3>
                         <ul>
-                            <li>Eenvoudige implementatie</li>
+                            <li>Eenvoudige implementatie in 24 uur</li>
                             <li>Compatibel met bestaande systemen</li>
                             <li>Geen verstoring van huidige processen</li>
+                            <li>API-integraties met populaire platforms</li>
                         </ul>
                     </div>
                     
                     <div class="feature-card">
                         <h3>Data en Inzichten</h3>
                         <ul>
-                            <li>Waardevolle klantinzichten</li>
-                            <li>Gedetailleerde rapportages</li>
+                            <li>Waardevolle klantinzichten in real-time</li>
+                            <li>Gedetailleerde rapportages en analytics</li>
                             <li>Verbeter uw klantenservice continu</li>
+                            <li>Voorspellende analyses voor betere service</li>
                         </ul>
                     </div>
                     
                     <div class="feature-card">
                         <h3>Toekomstbestendig</h3>
                         <ul>
-                            <li>Schaalbare oplossingen</li>
-                            <li>Regelmatige updates en verbeteringen</li>
+                            <li>Schaalbare oplossingen voor groei</li>
+                            <li>Regelmatige AI-updates en verbeteringen</li>
                             <li>Klaar voor de digitale toekomst</li>
+                            <li>Machine learning voor slimmere responses</li>
                         </ul>
                     </div>
                 </div>
 
-                <div style="text-align: center; margin: 3rem 0;">
-                    <h3 class="section-title" style="font-size: 2rem;">Maak de Sprong naar de Toekomst</h3>
+                <div style="text-align: center; margin: 4rem 0;">
+                    <h3 class="section-title" style="font-size: 2.5rem;">Maak de Sprong naar de Toekomst</h3>
                     <p class="section-subtitle">Klaar om jouw klantinteracties te revolutioneren en je bedrijf naar een hoger niveau te tillen? Ontdek hoe Prismatik jouw perfecte partner kan zijn voor klantgerichte AI-oplossingen.</p>
                 </div>
             </section>
 
             <!-- Contact Form -->
-            <div class="form-container">
-                <form action="mailto:Prismatikai@outlook.com" method="post" enctype="text/plain">
-                    <h3>Aanmeldformulier</h3>
+            <section id="contact">
+                <div class="form-container">
+                    <form action="mailto:Prismatikai@outlook.com" method="post" enctype="text/plain">
+                        <h3>Start Uw AI-Transformatie</h3>
+                        
+                        <div class="form-row">
+                            <div>
+                                <label for="name">Naam *</label>
+                                <input type="text" id="name" name="name" placeholder="Uw volledige naam" required>
+                            </div>
+                            <div>
+                                <label for="company">Bedrijf *</label>
+                                <input type="text" id="company" name="company" placeholder="Uw bedrijfsnaam" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div>
+                                <label for="email">E-mailadres *</label>
+                                <input type="email" id="email" name="email" placeholder="uw.email@bedrijf.nl" required>
+                            </div>
+                            <div>
+                                <label for="phone">Telefoonnummer *</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+31 6 12345678" required>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="message">Vertel ons over uw project *</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Beschrijf uw behoeften en doelen..." required></textarea>
+                        </div>
+                        
+                        <div>
+                            <label>Hoe heeft u van ons gehoord? *</label>
+                            <div class="checkbox-group">
+                                <label><input type="radio" name="referral" value="Zoekmachine" required> 🔍 Zoekmachine (Google, Bing)</label>
+                                <label><input type="radio" name="referral" value="Sociale Media" required> 📱 Sociale Media</label>
+                                <label><input type="radio" name="referral" value="Aanbeveling" required> 👥 Aanbeveling van collega/vriend</label>
+                                <label><input type="radio" name="referral" value="Anders" required> ✨ Anders</label>
+                                <input type="text" name="other-referral" placeholder="Specificeer indien 'Anders' geselecteerd" style="margin-top: 0.5rem;">
+                            </div>
+                        </div>
+                        
+                        <label style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer;">
+                            <input type="checkbox" id="demo" name="demo" value="Ja" checked style="width: auto; margin: 0;">
+                            🎯 Ik wil graag een gratis demonstratie van 30 minuten
+                        </label>
+                        
+                        <input type="submit" value="🚀 Start Mijn AI-Transformatie">
+                    </form>
                     
-                    <label for="name">Naam:</label>
-                    <input type="text" id="name" name="name" placeholder="Wat is je naam?" required>
-                    
-                    <label for="company">Bedrijf:</label>
-                    <input type="text" id="company" name="company" placeholder="Wat is je bedrijf?" required>
-                    
-                    <label for="email">E-mailadres:</label>
-                    <input type="email" id="email" name="email" placeholder="Wat is je e-mailadres?" required>
-                    
-                    <label for="phone">Telefoonnummer:</label>
-                    <input type="tel" id="phone" name="phone" placeholder="Wat is je telefoonnummer?" required>
-                    
-                    <label for="message">Bericht:</label>
-                    <textarea id="message" name="message" rows="4" placeholder="Algemene informatie" required></textarea>
-                    
-                    <label>Hoe heb je van ons gehoord?</label>
-                    <div class="checkbox-group">
-                        <label><input type="radio" name="referral" value="Zoekmachine" required> Zoekmachine</label>
-                        <label><input type="radio" name="referral" value="Sociale Media" required> Sociale Media</label>
-                        <label><input type="radio" name="referral" value="Aanbeveling" required> Aanbeveling</label>
-                        <label><input type="radio" name="referral" value="Anders" required> Anders</label>
-                        <input type="text" name="other-referral" placeholder="Specificeer (indien anders)">
-                    </div>
-                    
-                    <label><input type="checkbox" id="demo" name="demo" value="Ja" checked> Ik wil een demonstratie aanvragen</label>
-                    
-                    <input type="submit" value="Verstuur Aanvraag">
-                </form>
-                
-                <p style="text-align: center; margin-top: 2rem; opacity: 0.9;">
-                    Door dit formulier in te vullen, stem je in met onze privacyverklaring en de manier waarop we jouw gegevens zullen gebruiken.
-                </p>
-            </div>
+                    <p style="text-align: center; margin-top: 2rem; opacity: 0.9; font-size: 0.9rem;">
+                        🔒 Uw gegevens zijn veilig bij ons. Door dit formulier in te vullen, stem je in met onze privacyverklaring.
+                    </p>
+                </div>
+            </section>
         </div>
     </main>
 
     <!-- Footer -->
     <footer>
         <div class="social-media-links">
-            <a href="https://www.facebook.com/people/Prismatik/61566408536987/" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style="width: 30px;">
+            <a href="https://www.facebook.com/people/Prismatik/61566408536987/" target="_blank" title="Facebook">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
             </a>
-            <a href="https://www.instagram.com/prismatikofficial/" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 30px;">
+            <a href="https://www.instagram.com/prismatikofficial/" target="_blank" title="Instagram">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
             </a>
-            <a href="https://www.youtube.com/channel/UC1Gf5ezfop8wLp-SlIHuG7w" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 30px;">
+            <a href="https://www.youtube.com/channel/UC1Gf5ezfop8wLp-SlIHuG7w" target="_blank" title="YouTube">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube">
             </a>
-            <a href="https://api.whatsapp.com/send/?phone=31626472332&text&type=phone_number&app_absent=0" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 30px;">
+            <a href="https://api.whatsapp.com/send/?phone=31626472332&text&type=phone_number&app_absent=0" target="_blank" title="WhatsApp">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
             </a>
         </div>
         
-        <p>&copy; 2024 Prismatik. Alle rechten voorbehouden.</p>
-        <p><a href="#" onclick="openPrivacyPolicy()">Privacybeleid</a> | <a href="#" onclick="openForm()">Algemene Voorwaarden</a></p>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;">&copy; 2024 Prismatik. Alle rechten voorbehouden.</p>
+        
+        <div class="footer-links">
+            <a href="#" onclick="openPrivacyPolicy()">Privacybeleid</a>
+            <a href="#" onclick="openForm()">Algemene Voorwaarden</a>
+        </div>
         
         <div class="powered-by">
-            <p>Powered by <a href="https://vanappiah.com/" target="_blank">Van Appiah</a></p>
+            <p>✨ Powered by <a href="https://vanappiah.com/" target="_blank">Van Appiah</a> - Digital Innovation Partner</p>
         </div>
     </footer>
 
+    <!-- Popup Overlay -->
+    <div class="popup-overlay" id="popupOverlay"></div>
+
     <!-- Privacy Policy Popup -->
     <div class="form-popup" id="myPrivacyPolicy">
-        <h1>Privacybeleid Prismatik</h1>
+        <h1>🔒 Privacybeleid Prismatik</h1>
         <p>Bij Prismatik nemen we jouw privacy en de bescherming van jouw persoonlijke gegevens zeer serieus. Dit privacybeleid legt uit welke informatie we verzamelen, hoe we die gebruiken, en welke rechten je hebt met betrekking tot jouw gegevens.</p>
         
-        <ol>
-            <li><strong>Wie we zijn</strong>
-                <p>Prismatik is een platform dat geavanceerde AI-chatbots biedt voor bedrijven om hun klantinteracties te verbeteren. Voor vragen over dit beleid kun je contact met ons opnemen via Prismatikai@outlook.com.</p>
+        <ol style="line-height: 1.8; margin: 2rem 0;">
+            <li><strong>🏢 Wie we zijn</strong>
+                <p>Prismatik is een innovatief platform dat geavanceerde AI-chatbots biedt voor bedrijven om hun klantinteracties te revolutioneren. Voor vragen over dit beleid kun je contact met ons opnemen via Prismatikai@outlook.com.</p>
             </li>
-            <li><strong>Welke gegevens we verzamelen</strong>
-                <ul>
-                    <li>Identificatiegegevens: zoals jouw naam, bedrijfsnaam, e-mailadres en telefoonnummer.</li>
-                    <li>Gebruik van de website: gegevens over jouw interacties met onze website.</li>
-                    <li>Informatie die je zelf verstrekt: zoals formulieren die je invult op onze website.</li>
+            <li><strong>📊 Welke gegevens we verzamelen</strong>
+                <ul style="margin: 1rem 0;">
+                    <li>Identificatiegegevens: naam, bedrijfsnaam, e-mailadres en telefoonnummer</li>
+                    <li>Websitegebruik: interacties met onze website en voorkeuren</li>
+                    <li>Communicatie: berichten en feedback die je met ons deelt</li>
+                    <li>Technische gegevens: IP-adres, browsertype en apparaatinformatie</li>
                 </ul>
             </li>
-            <li><strong>Hoe we jouw gegevens gebruiken</strong>
-                <ul>
-                    <li>Om onze diensten te leveren</li>
-                    <li>Voor communicatie en klantenservice</li>
-                    <li>Voor verbetering van onze diensten</li>
-                    <li>Voor marketing (met jouw toestemming)</li>
+            <li><strong>🎯 Hoe we jouw gegevens gebruiken</strong>
+                <ul style="margin: 1rem 0;">
+                    <li>Levering van onze AI-chatbot diensten</li>
+                    <li>Persoonlijke communicatie en klantenservice</li>
+                    <li>Verbetering en optimalisatie van onze services</li>
+                    <li>Marketing en promotionele activiteiten (met toestemming)</li>
                 </ul>
             </li>
-            <li><strong>Jouw rechten</strong>
-                <ul>
-                    <li>Recht op inzage van jouw gegevens</li>
-                    <li>Recht op correctie van onjuiste gegevens</li>
-                    <li>Recht op verwijdering van jouw gegevens</li>
-                    <li>Recht op bezwaar tegen gebruik</li>
+            <li><strong>⚖️ Jouw rechten</strong>
+                <ul style="margin: 1rem 0;">
+                    <li>Recht op inzage van al jouw opgeslagen gegevens</li>
+                    <li>Recht op correctie van onjuiste of verouderde informatie</li>
+                    <li>Recht op verwijdering van jouw persoonlijke gegevens</li>
+                    <li>Recht op bezwaar tegen bepaalde verwerkingen</li>
+                    <li>Recht op dataportabiliteit naar andere dienstverleners</li>
                 </ul>
             </li>
         </ol>
         
-        <button type="button" class="btn cancel" onclick="closePrivacyPolicy()">Sluit</button>
+        <button type="button" class="btn cancel" onclick="closePrivacyPolicy()">Sluiten</button>
     </div>
 
     <!-- Terms and Conditions Popup -->
     <div class="form-popup" id="myForm">
-        <h1>Algemene Voorwaarden Prismatik</h1>
-        <p>Welkom bij Prismatik, een platform dat geavanceerde AI-chatbotoplossingen biedt. Door gebruik te maken van onze website en diensten, stem je in met de volgende algemene voorwaarden.</p>
+        <h1>📋 Algemene Voorwaarden Prismatik</h1>
+        <p>Welkom bij Prismatik, uw partner voor geavanceerde AI-chatbotoplossingen. Door gebruik te maken van onze website en diensten, stem je in met de volgende algemene voorwaarden.</p>
         
-        <ol>
-            <li><strong>Definities</strong>
-                <ul>
-                    <li>Prismatik: de eigenaar van de website en aanbieder van AI-chatbotdiensten.</li>
-                    <li>Gebruiker: een persoon of bedrijf dat gebruikmaakt van de diensten van Prismatik.</li>
-                    <li>Diensten: de AI-chatbotoplossingen en alle andere producten of services aangeboden door Prismatik.</li>
+        <ol style="line-height: 1.8; margin: 2rem 0;">
+            <li><strong>📖 Definities</strong>
+                <ul style="margin: 1rem 0;">
+                    <li><strong>Prismatik:</strong> de eigenaar van de website en aanbieder van AI-chatbotdiensten</li>
+                    <li><strong>Gebruiker:</strong> een persoon of bedrijf dat gebruikmaakt van onze diensten</li>
+                    <li><strong>Diensten:</strong> alle AI-chatbotoplossingen en gerelateerde services van Prismatik</li>
                 </ul>
             </li>
-            <li><strong>Gebruik van de Dienst</strong>
-                <ul>
-                    <li>Gebruikers moeten zich registreren om toegang te krijgen tot bepaalde functies.</li>
-                    <li>Gebruikers zijn verantwoordelijk voor het vertrouwelijk houden van hun accountgegevens.</li>
-                    <li>Prismatik behoudt zich het recht voor om de dienst te wijzigen of te beëindigen.</li>
+            <li><strong>🔧 Gebruik van de Dienst</strong>
+                <ul style="margin: 1rem 0;">
+                    <li>Registratie is vereist voor toegang tot premium functies</li>
+                    <li>Gebruikers zijn verantwoordelijk voor de beveiliging van hun accountgegevens</li>
+                    <li>Prismatik behoudt zich het recht voor om diensten te wijzigen of te beëindigen</li>
+                    <li>Misbruik van onze diensten is ten strengste verboden</li>
                 </ul>
             </li>
-            <li><strong>Aansprakelijkheid</strong>
-                <ul>
-                    <li>Prismatik is niet aansprakelijk voor schade door gebruik van de diensten, tenzij door opzet of grove nalatigheid.</li>
-                    <li>Gebruikers zijn verantwoordelijk voor schade door onjuist gebruik.</li>
+            <li><strong>💰 Betaling en Abonnementen</strong>
+                <ul style="margin: 1rem 0;">
+                    <li>Prijzen worden duidelijk gecommuniceerd voor aankoop</li>
+                    <li>Abonnementen worden automatisch verlengd tenzij opgezegd</li>
+                    <li>Annuleringen kunnen met inachtneming van de opzegtermijn</li>
                 </ul>
             </li>
-            <li><strong>Toepasselijk Recht</strong>
-                <p>Op deze voorwaarden is het Nederlands recht van toepassing.</p>
+            <li><strong>⚠️ Aansprakelijkheid</strong>
+                <ul style="margin: 1rem 0;">
+                    <li>Prismatik is niet aansprakelijk voor schade door normaal gebruik</li>
+                    <li>Gebruikers zijn verantwoordelijk voor schade door onjuist gebruik</li>
+                    <li>Onze aansprakelijkheid is beperkt tot de waarde van de dienst</li>
+                </ul>
+            </li>
+            <li><strong>🏛️ Toepasselijk Recht</strong>
+                <p>Op deze voorwaarden is het Nederlands recht van toepassing. Geschillen worden voorgelegd aan de bevoegde rechtbank in Nederland.</p>
             </li>
         </ol>
         
-        <button type="button" class="btn cancel" onclick="closeForm()">Sluit</button>
+        <button type="button" class="btn cancel" onclick="closeForm()">Sluiten</button>
     </div>
 
     <script>
         // Privacy Policy Functions
         function openPrivacyPolicy() {
             document.getElementById("myPrivacyPolicy").style.display = "block";
+            document.getElementById("popupOverlay").style.display = "block";
+            document.body.style.overflow = "hidden";
         }
         
         function closePrivacyPolicy() {
             document.getElementById("myPrivacyPolicy").style.display = "none";
+            document.getElementById("popupOverlay").style.display = "none";
+            document.body.style.overflow = "auto";
         }
         
         // Terms and Conditions Functions
         function openForm() {
             document.getElementById("myForm").style.display = "block";
+            document.getElementById("popupOverlay").style.display = "block";
+            document.body.style.overflow = "hidden";
         }
         
         function closeForm() {
             document.getElementById("myForm").style.display = "none";
+            document.getElementById("popupOverlay").style.display = "none";
+            document.body.style.overflow = "auto";
         }
         
         // Smooth scrolling function
         function scrollToSection(sectionId) {
-            document.getElementById(sectionId).scrollIntoView({
-                behavior: 'smooth'
-            });
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         }
         
-        // Close popups when clicking outside
-        window.onclick = function(event) {
-            const privacyPopup = document.getElementById("myPrivacyPolicy");
-            const termsPopup = document.getElementById("myForm");
-            
-            if (event.target == privacyPopup) {
-                privacyPopup.style.display = "none";
-            }
-            if (event.target == termsPopup) {
-                termsPopup.style.display = "none";
-            }
+        // Close popups when clicking overlay
+        document.getElementById("popupOverlay").onclick = function() {
+            closePrivacyPolicy();
+            closeForm();
         }
+        
+        // Close popups with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closePrivacyPolicy();
+                closeForm();
+            }
+        });
+        
+        // Smooth loading animation
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.loading-animation').style.display = 'none';
+            }, 1500);
+        });
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements for animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.feature-card, .stat-item');
+            animateElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        });
+        
+        // Add floating animation to CTA buttons
+        const ctaButtons = document.querySelectorAll('.cta-button');
+        ctaButtons.forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = 'float 2s ease-in-out infinite';
+                }, 10);
+            });
+        });
     </script>
 </body>
 </html>
